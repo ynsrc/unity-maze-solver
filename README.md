@@ -1,7 +1,7 @@
 # Unity Maze Solver Robot Simulation
 This is a recreational project which is in very early stage now.
 
-[Screenshot](Screenshot.png)
+![Screenshot](Screenshot.png)
 
 # Attributions
 * https://docs.unity3d.com/Manual/WheelColliderTutorial.html
