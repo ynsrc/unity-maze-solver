@@ -13,14 +13,22 @@ public class RobotManualController : MonoBehaviour
     public float steeringAngle = 30f;
     public float rayLength = 15f;
 
-    private Camera mainCamera;
-    private Vector3 mainCameraDistances;
+    private LineRenderer frontLineRenderer, leftLineRenderer, rightLineRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        mainCamera = Camera.main;
-        mainCameraDistances = transform.position - mainCamera.transform.position;
+        frontLineRenderer = sensorFrontTransform.GetComponent<LineRenderer>();
+        leftLineRenderer = sensorLeftTransform.GetComponent<LineRenderer>();
+        rightLineRenderer = sensorRightTransform.GetComponent <LineRenderer>();
+
+        frontLineRenderer.startWidth = frontLineRenderer.endWidth = 0.2f;
+        leftLineRenderer.startWidth = leftLineRenderer.endWidth = 0.2f;
+        rightLineRenderer.startWidth = rightLineRenderer.endWidth = 0.2f;
+
+        frontLineRenderer.startColor = frontLineRenderer.endColor = Color.green;
+        leftLineRenderer.startColor = leftLineRenderer.endColor = Color.green;
+        rightLineRenderer.startColor = rightLineRenderer.endColor = Color.green;
 
         rearLeftWheelCollider.brakeTorque = 0f;
         rearRightWheelCollider.brakeTorque = 0f;
@@ -53,14 +61,20 @@ public class RobotManualController : MonoBehaviour
         
         frontPartTransform.localEulerAngles = frontPartRotation;
 
-        mainCamera.transform.position = transform.position - mainCameraDistances;
-
         var frontRay = new Ray(sensorFrontTransform.position, sensorFrontTransform.forward);
         var leftRay = new Ray(sensorLeftTransform.position, sensorLeftTransform.forward);
         var rightRay = new Ray(sensorRightTransform.position, sensorRightTransform.forward);
 
-        Debug.DrawRay(frontRay.origin, frontRay.direction * rayLength, Physics.Raycast(frontRay, rayLength) ? Color.red : Color.green);
-        Debug.DrawRay(leftRay.origin, leftRay.direction * rayLength, Physics.Raycast(leftRay, rayLength) ? Color.red : Color.green);
-        Debug.DrawRay(rightRay.origin, rightRay.direction * rayLength, Physics.Raycast(rightRay, rayLength) ? Color.red : Color.green);
+        frontLineRenderer.SetPosition(0, frontRay.origin);
+        frontLineRenderer.SetPosition(1, frontRay.origin + frontRay.direction * rayLength);
+        frontLineRenderer.startColor = frontLineRenderer.endColor = Physics.Raycast(frontRay, rayLength) ? Color.red : Color.green;
+
+        leftLineRenderer.SetPosition(0, leftRay.origin);
+        leftLineRenderer.SetPosition(1, leftRay.origin + leftRay.direction * rayLength);
+        leftLineRenderer.startColor = leftLineRenderer.endColor = Physics.Raycast(leftRay, rayLength) ? Color.red : Color.green;
+
+        rightLineRenderer.SetPosition(0, rightRay.origin);
+        rightLineRenderer.SetPosition(1, rightRay.origin + rightRay.direction * rayLength);
+        rightLineRenderer.startColor = rightLineRenderer.endColor = Physics.Raycast(rightRay, rayLength) ? Color.red : Color.green;
     }
 }
