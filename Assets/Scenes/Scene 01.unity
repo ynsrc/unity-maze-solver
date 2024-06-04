@@ -1344,9 +1344,9 @@ MonoBehaviour:
   - {fileID: 279208285}
   - {fileID: 962592330}
   servoJoint: {fileID: 955616239}
-  sensorLeftController: {fileID: 0}
-  sensorFrontController: {fileID: 0}
-  sensorRightController: {fileID: 0}
+  sensorLeftController: {fileID: 1064013635}
+  sensorFrontController: {fileID: 901466698}
+  sensorRightController: {fileID: 1078800039}
   motorMoveForce: 500
 --- !u!54 &731299033
 Rigidbody:

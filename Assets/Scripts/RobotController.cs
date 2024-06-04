@@ -9,6 +9,8 @@ public class RobotController : MonoBehaviour
     public SensorController sensorLeftController, sensorFrontController, sensorRightController;
 
     public float motorMoveForce = 500f;
+
+    private float vAxis, hAxis = 0.0f;
     
     void SolveMaze()
     {
@@ -18,16 +20,54 @@ public class RobotController : MonoBehaviour
 
         if (frontDistance < 15f)
         {
-
+            if (rightDistance < 15f)
+            {
+                vAxis = 1f;
+                hAxis = -1f;
+            }
+            else
+            {
+                vAxis = 1f;
+                hAxis = 1f;
+            }
+        }
+        else
+        {
+            if (rightDistance > 10f)
+            {
+                vAxis = 1f;
+                hAxis = 1f;
+            }
+            else
+            {
+                if (rightDistance < 6f)
+                {
+                    vAxis = 1f;
+                    hAxis = -0.5f;
+                }
+                else if (leftDistance < 6f)
+                {
+                    vAxis = 1f;
+                    hAxis = 0.5f;
+                }
+                else
+                {
+                    vAxis = 1f;
+                    hAxis = 0f;
+                }
+            }
         }
     }
 
     void Update()
     {
+        SolveMaze();
 
+        float vAxisInput = Input.GetAxis("Vertical");
+        float hAxisInput = Input.GetAxis("Horizontal");
 
-        float vAxis = Input.GetAxis("Vertical");
-        float hAxis = Input.GetAxis("Horizontal");
+        if (vAxisInput != 0f) vAxis = vAxisInput;
+        if (hAxisInput != 0f) hAxis = hAxisInput;
 
         if (vAxis != 0f)
         {
