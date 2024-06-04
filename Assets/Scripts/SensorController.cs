@@ -8,6 +8,9 @@ public class SensorController : MonoBehaviour
     public float lineStartWidth = 0.2f;
     public float lineEndWidth = 0.2f;
 
+    [HideInInspector]
+    public float distance = float.MaxValue;
+
     private LineRenderer lineRenderer;
 
     void Start()
