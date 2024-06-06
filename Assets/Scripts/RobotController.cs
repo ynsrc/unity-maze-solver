@@ -27,8 +27,16 @@ public class RobotController : MonoBehaviour
             }
             else
             {
-                vAxis = 1f;
-                hAxis = 1f;
+                if (leftDistance > 15f)
+                {
+                    vAxis = -1f;
+                    hAxis = 1f;
+                }
+                else
+                {
+                    vAxis = 1f;
+                    hAxis = 1f;
+                }
             }
         }
         else
