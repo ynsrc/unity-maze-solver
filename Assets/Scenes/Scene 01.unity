@@ -1992,9 +1992,9 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Left Distance:
 
-    Right Distance:
+    Front Distance:
 
-    Front Distance:'
+    Right Distance:'
 --- !u!222 &966518570
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4793,7 +4793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 416678447}
   smoothSpeed: 0.125
-  locationOffset: {x: 0, y: 5, z: -10}
+  locationOffset: {x: 0, y: 5, z: -8}
   rotationOffset: {x: 30, y: 0, z: 0}
 --- !u!1 &2131203453
 GameObject:
